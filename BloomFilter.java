@@ -40,9 +40,22 @@ public class BloomFilter<T>
             return;
         }
 
-
-        BloomFilter<String> bloomy = new BloomFilter<>(Integer.parseInt(args[0]));
-        bloomy.add("hello");
+		String [] names = {"Sean", "Arya", "Robb", "Bran", "Dany"};
+		
+		// we use the hashset to test if the bloomfilter is actually working!
+		BloomFilter<String> bloomy = new BloomFilter<>(Integer.parseInt(args[0]));
+		HashSet<String> hashyHash = new HashSet<String>();
+		
+		for (String s : names)
+		{
+			bloomy.add(s);
+			hashyHash.add(s);
+		}
+		
+		// Verify that these names made it into the Bloom filter correctly.
+		for (String s : names)
+			if (bloomy.contains(s))
+				System.out.println("Found name: " + s);
     }
 
     public BloomFilter(int numFilters)
